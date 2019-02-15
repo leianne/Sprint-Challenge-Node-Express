@@ -17,6 +17,7 @@ router.post('/', async (req, res) => {
         res.status(500).json({ message: "nott working!!!!"})
     }
 })
+
 router.get('/', async (req, res) => {
     try {
         const projects = await db.get()
@@ -31,5 +32,34 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('')
+router.get('/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const project = await db.get(id)
+        if(project) {
+            res.status(200).json(project)
+        } else {
+            res.status(404).json({ message: "we cant find that project "})
+        }
+    }
+    catch(error) {
+        res.status(500).json({ message: "nott working!!!!"})
+    }
+})
+
+router.put('/:id', async (req, res) => {
+    const id = req.params.id
+    const updates = req.body
+    try {
+        const updatedPost = await db.update(id, updates)
+        if(updatedPost) {
+            res.status(202).json(updatedPost)
+        } else {
+            res.status(404).json({ message: "we cant find that project "})
+        }
+    }
+    catch(error) {
+
+    }
+})
 module.exports = router;
