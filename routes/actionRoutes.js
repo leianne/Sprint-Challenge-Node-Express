@@ -5,27 +5,27 @@ const router = express();
 
 
 
-router.post('/',  async (req, res) => {
-    const project_id = req.body.project_id
-    const description = req.body.description
-    const notes = req.body.notes
-    console.log(description.length)
-
-    if(project_id && description.length <= 128 && notes !== '') {
-        try {
-            const newAction = db.insert(req.body)
-            if(newAction) {
-                res.status(201).json({ message: "your project was created" })
-            }
-         }
-         catch(error) {
-             res.status(500).json({ message: "nott working!!!!"})
-             next()
-         }
+router.post('/', (req, res) => {
+    const action = req.body;
+   
+    if(action.description.length < 129 && action.notes !== '' && action.project_id) {
+        dbProjects.get(action.project_id)
+            .then(project => {
+                if(project) {
+                    db.insert(action)
+                        .then(result => res.status(201).json({ message: "your action was created" })
+                        )
+                        .catch(err => console.log(err))
+                } else {
+                    res.status(500).json(actions);
+                    console.log("failed")
+                }
+            })
+            .catch(err => res.status(404).json({ message: "we cant find that project "})
+            )
     } else {
-        res.status(404).json({ message: "there is an issue with the info you sent" })
+        res.status(404).json({ message: "Your action must contain a valid project id a description no longer than 128 characters and notes"})
     }
-    
 })
 
 router.get('/', async (req, res) => {
