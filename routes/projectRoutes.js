@@ -59,7 +59,24 @@ router.put('/:id', async (req, res) => {
         }
     }
     catch(error) {
-
+        res.status(500).json({ message: "nott working!!!!"})
     }
 })
+
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id
+    console.log(id)
+    try {
+        const deleted = await db.remove(id);
+        if(deleted) {
+            res.status(202).json({ message: "project deleted"})
+        } else {
+            res.status(204)/json({ message: "we cant find that project "})
+        }
+    }
+    catch(error) {
+        res.status(500).json({ message: "nott working!!!!"})
+    }
+})
+
 module.exports = router;
