@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+I learned that in Express, as in React you have the ability to create custom middleware and also have access to the large number of prebuilt middleware from npm. I also learned that like React is to Javascript, Express is the layer on top of Node.js that allows us to write out code in a cleaner and more concise way, and pulls out the true capabilities of Node.js. 
+
 - [ ] Describe Middleware?
+
+Middleware are functions that extend are software. We use middle ware I’m name frameworks including express to add features to our application. Middleware in Express is its biggest feature and most of the code that we write in express including the route handlers are middleware.
 
 - [ ] Describe a Resource?
 
+ In the REST architecture we treat every piece of content as a resource . These resources can be anything atom Text files Html pages Images to Videos. The REST server that we create will provide us access to the resources we need and the REST client access and modifies these resources.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+Our API can return to our client a status code and message to let the client now if the call was successful or not. If it was successful it would send a status code in the 200s depending on the type of call.
+
 - [ ] How can we partition our application into sub-applications?
+
+We can partition our application by taking advantage of routing. This will allow us to split our application into as many parts as needed and keep things organized according to the needs of our application.
 
 ## Project Setup
 
